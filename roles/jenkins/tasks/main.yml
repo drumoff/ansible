@@ -1,0 +1,28 @@
+---
+- name: Install jenkins
+  block:
+  - name: Подключение Стандартного файла деплой
+    include: "../common/default_deploy.yml"
+    vars:
+        name: jenkins
+        templates:
+        - docker-compose.yml
+
+  - name: Изменение прав доступа к папке
+    become: true
+    file:
+        path: ./jenkins_home
+        mode: 0777
+        state: directory
+
+  - name: "Перезагрузка контейнера"
+    community.docker.docker_compose:
+      project_src: "./jenkins"
+      state: '{{ item }}'
+    loop:
+      - absent
+      - present
+
+  tags: 
+    - jenkins
+

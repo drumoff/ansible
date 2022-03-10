@@ -1,0 +1,5 @@
+- hosts: test_servers
+  remote_user: it
+  roles:
+    - { role: preconfig, tags: ['preconfig'] }
+    - { role: jenkins }

@@ -1,0 +1,23 @@
+apt:
+  packages:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg
+    - lsb-release
+    - python3-pip
+    - wget
+    - net-tools
+    - htop
+    - python3-pip
+
+python:
+  packages:
+  - docker
+  - PyYAML
+  - docker-compose
+  - jsondiff
+  - boto
+  - boto3
+  - botocore
+  - pexpect
