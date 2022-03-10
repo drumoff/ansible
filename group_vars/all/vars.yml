@@ -21,3 +21,5 @@ python:
   - boto3
   - botocore
   - pexpect
+
+test: test
