@@ -1,0 +1,9 @@
+---
+- name: Подключение Стандартного файла деплой
+  include: "../common/default_deploy.yml"
+  vars:
+    name: keycloak
+    templates:
+    - docker-compose.yml
+  tags:
+    - keycloak
