@@ -11,7 +11,7 @@
   - name: Изменение прав доступа к папке
     become: true
     file:
-        path: ./jenkins_home
+        path: ./jenkins/jenkins_home
         mode: 0777
         state: directory
 
