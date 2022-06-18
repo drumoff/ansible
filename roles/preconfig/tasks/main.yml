@@ -1,14 +1,18 @@
 ---
+- name: Добавляем пользователей
+  include: "user.yml"
+  vars: 
+    user: "{{ item }}"
+  loop: "{{ users }}"
+    
 - name: Установка docker и docker-compose
   become: true 
   block:
-    
   - name: Добавляем universe
     apt_repository:
       repo: "deb http://us.archive.ubuntu.com/ubuntu/ {{ ansible_distribution_release }} universe"
       state: present 
    
-
   - name: Установка дополнительных пакетов
     apt:
       name: '{{ apt.packages }}'
@@ -59,11 +63,13 @@
 
   - name: Добавление пользователя в группу docker и sudo
     user: 
-      name: '{{ ansible_ssh_user }}'
+      name: '{{ item.name }}'
       groups:
       - docker
       - sudo
       append: yes
+    loop: "{{ users }}"
+      
   tags:
     - docker_install
 

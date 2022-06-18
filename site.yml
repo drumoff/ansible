@@ -1,4 +1,4 @@
-- hosts: test_servers
+- hosts: tst
   remote_user: it
   roles:
     - { role: preconfig, tags: ['preconfig'] }
