@@ -68,7 +68,7 @@
       - docker
       - sudo
       append: yes
-    loop: "{{ users }}"
+    loop: "{{ sudousers }}"
       
   tags:
     - docker_install

@@ -3,4 +3,4 @@
   roles:
     - { role: preconfig, tags: ['preconfig'] }
     - { role: jenkins }
-    - { role: keycloak }
+    - { role: keycloak, tags: ['keycloak']  }
