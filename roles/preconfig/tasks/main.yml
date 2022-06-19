@@ -63,7 +63,7 @@
 
   - name: Добавление пользователя в группу docker и sudo
     user: 
-      name: '{{ item.name }}'
+      name: '{{ item }}'
       groups:
       - docker
       - sudo
