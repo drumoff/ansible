@@ -2,7 +2,7 @@
 - name: Пользователь с правами sudo
   become: true
   block:
-  - name: Добавляем пользователя
+  - name: Добавляем пользователя {{ user.name }}
     user: 
       name: "{{ user.name }}"
       shell: /bin/bash
@@ -11,7 +11,7 @@
   - name: Добавляем ключ в authorized_keys
     authorized_key: user="{{ user.name }}" key="{{ user.key }}"
 
-  - name: Добавляем пользователя в sudoers
+  - name: Добавляем пользователя {{ user.name }} в sudoers
     template:
       src: "sudoers/user.j2"
       dest: /etc/sudoers.d/{{ user.name }}

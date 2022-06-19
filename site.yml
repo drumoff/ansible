@@ -1,5 +1,5 @@
 - hosts: tst
-  remote_user: it
+  remote_user: ybd
   roles:
     - { role: preconfig, tags: ['preconfig'] }
     - { role: jenkins }
