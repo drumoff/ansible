@@ -1,2 +1,2 @@
 [tst]
-192.168.1.73 ansible_ssh_user=ybd
+192.168.1.75 ansible_ssh_user=ybd
