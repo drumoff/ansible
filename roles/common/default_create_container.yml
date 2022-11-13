@@ -1,0 +1,8 @@
+---
+- name: "Создание папки для конфигурации: [{{ name }}]"
+  file:
+    path: "/home/{{ ansible_ssh_user }}/{{ name }}"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    mode: 0771
+    state: directory

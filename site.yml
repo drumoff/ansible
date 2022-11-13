@@ -4,3 +4,8 @@
     - { role: preconfig, tags: ['preconfig'] }
     - { role: jenkins }
     - { role: keycloak, tags: ['keycloak']  }
+
+- hosts: nginx
+  remote_user: ybd
+  roles:
+    - { role: nginx, tags: ['nginx'] }
