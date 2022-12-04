@@ -9,3 +9,8 @@
   remote_user: ybd
   roles:
     - { role: nginx, tags: ['nginx'] }
+
+- hosts: ipa
+  remote_user: ybd
+  roles:
+    - { role: ipa, tags: ['ipa'] }

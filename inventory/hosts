@@ -1,5 +1,5 @@
-[tst]
+[ipa]
 192.168.1.106 ansible_ssh_user=ybd
 
-[nginx]
-192.168.1.106 ansible_ssh_user=ybd
+[ipa:vars]
+ansible_python_interpreter=/usr/bin/python3

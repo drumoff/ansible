@@ -1,0 +1,72 @@
+---
+- name: Предподготовка
+  become: true
+  block:
+  - name: Настройка временной зоны
+    timezone:
+      name: "{{ timezone }}"
+
+  - name: Установка дополнительных пакетов
+    yum:
+      name: "{{ package }}"
+    vars:
+      package:
+        - python3
+        - python3-pip
+        - chrony
+  # - name: Установка pip
+  #   easy_install:
+  #     name: pip3
+  #     state: latest
+
+  - name: Установка пакетов для python3
+    pip:
+      virtualenv: /tmp/py3
+      virtualenv_command: /usr/bin/python3 -m venv
+      name: pexpect
+
+  - name: Запуск синхронизации времени 
+    systemd:
+      name: chronyd
+      enabled: true
+      state: started
+
+  - name: Устанавливаем имя хоста
+    hostname:
+      name: "{{ hostname }}.{{ domain }}"
+      use: systemd
+
+- name: Установка сервера free-ipa
+  become: true
+  block:
+  - name: Установка пакетов
+    yum:
+      name: '{{ package }}'
+    vars:
+      package:
+        - ipa-server
+        - ipa-server-dns
+
+  - name: Конфигурация сервера free ipa
+    expect:
+      command: ipa-server-install
+      echo: true
+      responses:
+        "(?i)Do you want to configure integrated DNS (BIND)": yes
+        "^Server host name": ''
+        "^Please confirm the domain name": ''
+        "^Please provide a realm name": ''
+        "(?i)Directory Manager password": '{{ ipaPassword }}'
+        "Password (confirm)": '{{ ipaPassword }}'
+        "(?i)IPA admin password": '{{ ipaPassword }}'
+        "^Do you want to configure DNS forwarders?": yes
+        "^Enter an IP address for a DNS forwarder, or press Enter to skip": ''
+        "^Do you want to search for missing reverse zones?": ''
+        "^Continue to configure the system with these values?": 'yes' 
+
+
+
+
+
+   
+

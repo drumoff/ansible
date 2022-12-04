@@ -1,0 +1,5 @@
+timezone: "Europe/Moscow"
+domain: 'ybd.local'
+hostname: 'ipa'
+
+ipaPassword: 12345678
