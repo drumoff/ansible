@@ -14,15 +14,9 @@
         - python3
         - python3-pip
         - chrony
-  # - name: Установка pip
-  #   easy_install:
-  #     name: pip3
-  #     state: latest
 
   - name: Установка пакетов для python3
     pip:
-      virtualenv: /tmp/py3
-      virtualenv_command: /usr/bin/python3 -m venv
       name: pexpect
 
   - name: Запуск синхронизации времени 
@@ -50,19 +44,23 @@
   - name: Конфигурация сервера free ipa
     expect:
       command: ipa-server-install
+      timeout: 600
       echo: true
       responses:
-        "(?i)Do you want to configure integrated DNS (BIND)": yes
-        "^Server host name": ''
-        "^Please confirm the domain name": ''
-        "^Please provide a realm name": ''
-        "(?i)Directory Manager password": '{{ ipaPassword }}'
-        "Password (confirm)": '{{ ipaPassword }}'
-        "(?i)IPA admin password": '{{ ipaPassword }}'
-        "^Do you want to configure DNS forwarders?": yes
-        "^Enter an IP address for a DNS forwarder, or press Enter to skip": ''
-        "^Do you want to search for missing reverse zones?": ''
-        "^Continue to configure the system with these values?": 'yes' 
+        "(?m)^Do you want to configure integrated DNS": 'yes'
+        "(?m)^Server host name":  "{{ hostname }}.{{ domain }}"
+        "(?m)^Please confirm the domain name": '{{ domain }}'
+        "(?m)^Please provide a realm name": '{{ domain | upper }}'
+        "(?m)^Directory Manager password": '{{ ipaPassword }}'
+        "(?m)^Password": '{{ ipaPassword }}'
+        "(?m)^IPA admin password": '{{ ipaPassword }}'
+        "(?m)^Do you want to configure DNS forwarders": 'yes'
+        "(?m)^Do you want to configure these servers as DNS forwarders": 'no'
+        "(?m)^Enter an IP address for a DNS forwarder, or press Enter to skip": ''
+        "(?m)^Do you want to search for missing reverse zones": ''
+        "(?m)^Do you want to create reverse zone for IP": 'yes'
+        "(?m)^Please specify the reverse zone name": ''
+        "(?m)^Continue to configure the system with these values": 'yes' 
 
 
 
