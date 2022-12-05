@@ -1,9 +1,12 @@
 ---
 - name: Подключение Стандартного файла деплой
-  include: "../common/default_deploy.yml"
+  include: "nginx_deploy.yml"
   vars:
     name: nginx
     templates:
     - docker-compose.yml
+    configs:
+    - jenkins.conf
+    - registry.conf
   tags:
     - nginx

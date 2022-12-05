@@ -3,3 +3,13 @@
 
 [ipa:vars]
 ansible_python_interpreter=/usr/bin/python3
+
+[registry]
+192.168.1.107
+
+[registry:vars]
+ansible_ssh_user=ybd
+
+[nginx]
+192.168.1.109 ansible_ssh_user=ybd
+

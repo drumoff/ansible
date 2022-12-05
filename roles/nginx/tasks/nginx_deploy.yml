@@ -1,0 +1,34 @@
+---
+- name: "Создание папки для конфигурации: [{{ name }}]"
+  file:
+    path: "/home/{{ ansible_ssh_user }}/{{ name }}"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    mode: 0771
+    state: directory
+
+- name: "Создание директории дополнительных конфигураций: [{{ name }}]"
+  file:
+    path: "/home/{{ ansible_ssh_user }}/{{ name }}/conf.d"
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+    mode: 0771
+    state: directory
+
+- name: "Загрузка docker-compose: [{{ name }}]"
+  template:
+    src: "{{ name }}/{{ item }}.j2"
+    dest: "/home/{{ ansible_ssh_user }}/{{ name }}/{{ item }}"
+    mode: 0771
+  loop: '{{ templates }}'
+
+- name: Загрузка файлов конфигурации [{{ name }}]
+  template:
+    src: "{{ name }}/conf.d/{{ item }}.j2"
+    dest: "/home/{{ ansible_ssh_user }}/{{ name }}/conf.d/{{ item }}"
+    mode: 0771
+  loop: '{{ configs }}'    
+
+- name: "Старт контейнера: [{{ name }}]"
+  community.docker.docker_compose:
+    project_src: "{{ name }}"

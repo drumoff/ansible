@@ -1,5 +1,5 @@
-- hosts: tst
-  remote_user: ybd
+- hosts: registry
+  remote_user: it
   roles:
     - { role: preconfig, tags: ['preconfig'] }
     - { role: jenkins }
@@ -14,3 +14,8 @@
   remote_user: ybd
   roles:
     - { role: ipa, tags: ['ipa'] }
+
+- hosts: registry
+  remote_user: ybd  
+  roles:
+    - { role: registry, tags: ['registry'] }
