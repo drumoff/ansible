@@ -1,4 +1,9 @@
 ---
+- name: Копирование сертификатов
+  copy:
+    src: "../../common/files/certs"
+    dest: "/home/ybd/registry"
+  
 - name: Подключение Стандартного файла деплой
   include: "../common/default_deploy.yml"
   vars:

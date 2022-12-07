@@ -27,8 +27,14 @@
     src: "{{ name }}/conf.d/{{ item }}.j2"
     dest: "/home/{{ ansible_ssh_user }}/{{ name }}/conf.d/{{ item }}"
     mode: 0771
-  loop: '{{ configs }}'    
+  loop: '{{ configs }}'
 
-- name: "Старт контейнера: [{{ name }}]"
+- name: Загрузка сертификатов
+  copy:
+    src: "../../common/files/certs"
+    dest: "/home/{{ ansible_ssh_user }}/{{ name }}"
+
+- name: "Рестарт контейнера: [{{ name }}]"
   community.docker.docker_compose:
     project_src: "{{ name }}"
+    restarted: true
