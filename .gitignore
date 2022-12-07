@@ -1,3 +1,4 @@
 .vscode
 inventory/hosts
-**/files/*.crt
+roles/common/files
+.gitignore
