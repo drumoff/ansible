@@ -1,9 +1,7 @@
-- hosts: registry
+- hosts: preconfig
   remote_user: it
   roles:
     - { role: preconfig, tags: ['preconfig'] }
-    - { role: jenkins }
-    - { role: keycloak, tags: ['keycloak']  }
 
 - hosts: nginx
   remote_user: ybd

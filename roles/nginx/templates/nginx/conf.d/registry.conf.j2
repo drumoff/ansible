@@ -10,7 +10,7 @@ server {
     ssl_certificate     /etc/ssl/certs/registry.ybd.local.crt;
     ssl_certificate_key /etc/ssl/certs/registry.ybd.local.key;
     ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
-
+    client_max_body_size 2000M;
     #access_log  /var/log/nginx/host.access.log  main;
 
     location / {
